@@ -735,7 +735,12 @@ body .calculator .input__control {
 .i-ua_skin_dark .HeaderDesktopForm-InputWrapper {
     background: var(--color-fon) !important;
 }
-
+.RequestMeta-Level {
+    box-shadow: 0 0 20px rgb(255 255 255 / 8%) !important;
+}
+.SerpItem {
+    box-shadow: 0 0 20px rgb(255 255 255 / 8%) !important;
+}
 #131316
 `;
 
