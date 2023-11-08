@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name Yandex Dark
 // @namespace Yandex Dark
-// @version 0.0.1
+// @version 0.0.2
 // @description Yandex Dark Theme
 // @author Nicoskin
 // @grant none
