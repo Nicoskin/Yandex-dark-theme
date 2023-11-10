@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name Yandex Dark
 // @namespace Yandex Dark
-// @version 0.0.2
+// @version 0.0.3
 // @description Yandex Dark Theme
 // @author Nicoskin
 // @grant none
 // @run-at document-start
-// @include https://yandex.ru/search/*
+// @match https://yandex.ru/search/*
 // @run-at document-end
 // ==/UserScript==
 
@@ -622,7 +622,7 @@ body .calculator .input__control {
     /*width: 556px;*/
 }
 .Converter-Chart {
-    filter: invert(0.84) hue-rotate(187deg);
+    filter: invert(0.04);
 }
 .ConverterSelect .Select2-Button {
     border-left: 1px solid rgb(192 192 192 / 45%) !important;
