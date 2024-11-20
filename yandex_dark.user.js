@@ -1,13 +1,12 @@
 // ==UserScript==
-// @name Yandex Dark
-// @namespace Yandex Dark
-// @version 0.0.3
-// @description Yandex Dark Theme
-// @author Nicoskin
-// @grant none
-// @run-at document-start
-// @match https://yandex.ru/search/*
-// @run-at document-end
+// @name         Yandex Dark
+// @namespace    Yandex Dark
+// @version      0.0.4
+// @description  Yandex Dark Theme
+// @author       Nicoskin
+// @grant        none
+// @run-at       document-start
+// @match        https://yandex.ru/search/*
 // ==/UserScript==
 
 (function() {
@@ -36,26 +35,21 @@
       --color-grey3:       #404040;
       --color-reclama:     #ff5c5c;
       --color-film:        #242a2e;
-      --color-filmbottom: #363e44;
+      --color-filmbottom:  #363e44;
       --color-mg-surface-primary: #1a1f21 !important;
       --color-mg-typo-primary: #ddd !important;
       --color-mg-tint-superlight: #717171 !important;
       --id-color-text-primary: #c5c5c5 !important;
-        --id-color-text-secondary: #b3b8dd !important;
+      --id-color-text-secondary: #b3b8dd !important;
     }
-    
-    /*#9849ff
-    #7325bb*/
-      var(--color-hyperlin2)
-    
-    html{
+
+    html {
         background: var(--color-fon);
     }
-    body{
+    body {
         color: var(--color-text);
-        background: var(--color-fon)
+        background: var(--color-fon);
     }
-    
     .ot2Lic6IvpN3S_card {
         box-shadow: 0px 0px 9px 0 rgb(255 255 255 / 16%) !important;
     }
@@ -65,24 +59,13 @@
     .Path-Item {
         color: #40ab40 !important;
     }
-    .main {
-        background-color: #1a1a1e !important;
-    }
-    .HeaderDesktop {
+    .main, .HeaderDesktop {
         background-color: #1a1a1e !important;
     }
     `;
-    
-    if (typeof GM_addStyle !== "undefined") {
-      GM_addStyle(css);
-    } else {
-      let styleNode = document.createElement("style");
-      styleNode.appendChild(document.createTextNode(css));
-      (document.querySelector("head") || document.documentElement).appendChild(styleNode);
-    }
-    })();
-    // ломается при малой ширене(только лого яндекса)
-    
-    
-    
-    
+
+    // Вставка стилей в head
+    let styleNode = document.createElement("style");
+    styleNode.textContent = css;
+    (document.head || document.documentElement).appendChild(styleNode);
+})();
