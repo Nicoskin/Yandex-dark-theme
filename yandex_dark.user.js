@@ -1,63 +1,23 @@
 // ==UserScript==
-// @name Yandex Dark
-// @namespace Yandex Dark
-// @version 0.0.3
-// @description Yandex Dark Theme
-// @author Nicoskin
-// @grant none
-// @run-at document-start
-// @match https://yandex.ru/search/*
-// @run-at document-end
+// @name         Yandex Dark
+// @namespace    Yandex Dark
+// @version      0.0.5
+// @description  Yandex Dark Theme
+// @author       Nicoskin
+// @grant        none
+// @run-at       document-start
+// @match        https://yandex.ru/search/*
+// @match        https://ya.ru/search/*
 // ==/UserScript==
 
 (function() {
     let css = `
-    :root {
-      --color-fon:         #18181C;
-      --color-text:        #ddd;
-      --color-white:       #fff;
-      --color-graytext:    #878787;
-      --color-hyperlink:   #04b;
-      --color-hyperlin2:   #5e5ed9;
-      --color-selected:    #9849ff;
-      --color-greenlink:   #048604;
-      --color-greenlink2:  #070;
-      --color-greyfill:    #5e6263;
-      --color-extrasearch: #282e31;
-      --color-darkgrey:    #2d2f2f;
-      --color-translater:  #3f3f3f;
-      --color-translater2: #c5c5c5;
-      --color-buttonvideo: #696969;
-      --color-relatedbut:  #424242;
-      --color-relatedbut2: #c9c9c9;
-      --color-navigation:  #999;
-      --color-grey:        #b2b2b2;
-      --color-grey2:       #7c7c7c;
-      --color-grey3:       #404040;
-      --color-reclama:     #ff5c5c;
-      --color-film:        #242a2e;
-      --color-filmbottom: #363e44;
-      --color-mg-surface-primary: #1a1f21 !important;
-      --color-mg-typo-primary: #ddd !important;
-      --color-mg-tint-superlight: #717171 !important;
-      --id-color-text-primary: #c5c5c5 !important;
-        --id-color-text-secondary: #b3b8dd !important;
-    }
-    
-    /*#9849ff
-    #7325bb*/
-      var(--color-hyperlin2)
-    
-    html{
+    html {
         background: var(--color-fon);
     }
-    body{
+    body {
         color: var(--color-text);
-        background: var(--color-fon)
-    }
-    
-    .ot2Lic6IvpN3S_card {
-        box-shadow: 0px 0px 9px 0 rgb(255 255 255 / 16%) !important;
+        background: var(--color-fon);
     }
     .content__left .Favicon_outer {
         box-shadow: 0px 0px 12px 0 rgb(255 255 255 / 36%);
@@ -65,24 +25,46 @@
     .Path-Item {
         color: #40ab40 !important;
     }
-    .main {
-        background-color: #1a1a1e !important;
-    }
-    .HeaderDesktop {
+    .main, .HeaderDesktop {
         background-color: #1a1a1e !important;
     }
     `;
-    
-    if (typeof GM_addStyle !== "undefined") {
-      GM_addStyle(css);
-    } else {
-      let styleNode = document.createElement("style");
-      styleNode.appendChild(document.createTextNode(css));
-      (document.querySelector("head") || document.documentElement).appendChild(styleNode);
+
+    // Вставка стилей в head
+    let styleNode = document.createElement("style");
+    styleNode.textContent = css;
+    (document.head || document.documentElement).appendChild(styleNode);
+})();
+
+
+(function() {
+    'use strict';
+
+    // Функция для добавления тени к блокам
+    function addShadowToBlocks() {
+        // Находим все элементы с нужными атрибутами
+        const selectors = [
+            'li[data-cid]', // Блоки с data-cid от 0 до 20
+            'div[data-cid]' // Блок с ролью complementary
+        ];
+
+        // Находим все элементы по указанным селекторам
+        const blocks = document.querySelectorAll(selectors.join(','));
+
+
+        blocks.forEach(block => {
+            // Проверяем, чтобы тень не добавлялась повторно
+            if (!block.dataset.shadowAdded) {
+                block.style.boxShadow = '0px 0px 9px 0 rgb(255 255 255 / 16%)';
+                block.dataset.shadowAdded = "true"; // Помечаем, что тень уже добавлена
+            }
+        });
     }
-    })();
-    // ломается при малой ширене(только лого яндекса)
-    
-    
-    
-    
+
+    // Запускаем функцию после загрузки страницы
+    window.addEventListener('load', addShadowToBlocks);
+
+    // Следим за изменениями в DOM, чтобы обработать динамически добавленные элементы
+    const observer = new MutationObserver(addShadowToBlocks);
+    observer.observe(document.body, { childList: true, subtree: true });
+})();
